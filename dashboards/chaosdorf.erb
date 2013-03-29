@@ -1,0 +1,30 @@
+<% content_for(:title) { "Chaosdorf Status" } %>
+<div class="gridster">
+  <ul>
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-view="Image" data-image="/logo.png" style="background-color: transparent;"></div>
+    </li>
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-view="Clock" style="background-color: #111;"></div>
+      <i class="icon-time icon-background"></i>
+    </li>
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="weather" data-view="Weather"></div>
+    </li>
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-view="Text" data-id="chaosdoor-mode" data-title="Chaosdoor Mode" style="background-color: #111;"></div>
+    </li>
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-view="Meter" data-id="uplink-traffic" style="background-color: #333;" data-min="0" data-max="5000000" data-title="Uplink Traffic" ></div>
+    </li>
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-view="Meter" data-id="downlink-traffic" style="background-color: #333;" data-min="0" data-max="100000000" data-title="Downlink Traffic" ></div>
+
+    </li>
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="temp" data-view="Meter" data-title="Temperature" data-min="0" data-max="40"></div>
+    </li>
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-view="Text" data-id="mpd-status" data-title="now playing"></div>
+    </li>
+</div>
