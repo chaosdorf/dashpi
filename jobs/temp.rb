@@ -1,6 +1,7 @@
-SCHEDULER.every '2s', :first_in => 0 do
-  json = Net::HTTP.get('graphserver', '/render/?target=movingMedian(offset(stats.gauges.foobar.temperature,-4),2)&from=-10minutes&format=json')
-  value = JSON.parse(json)[0]['datapoints'][1][0]
-  puts "Hackcenter Temperature: #{value}"
-  send_event('temp', value: value)
+SCHEDULER.every '10s', :first_in => 0 do
+  json = Net::HTTP.get('graphserver', '/render/?target=offset(stats.gauges.foobar.temperature,-4)&from=-2minutes&format=json')
+  current = JSON.parse(json)[0]['datapoints'][0][0]
+  last = JSON.parse(json)[0]['datapoints'][1][0]
+  puts "Hackcenter Temperature: #{current} (#{last})"
+  send_event('temp', current: current, last: last)
 end
