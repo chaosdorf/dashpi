@@ -1,10 +1,10 @@
 <script type='text/javascript'>
   $(function() {
-    Dashing.gridsterLayout('[{"col":5,"row":1},{"col":1,"row":1},{"col":3,"row":1},{"col":2,"row":1},{"col":3,"row":2},{"col":4,"row":2},{"col":4,"row":1},{"col":1,"row":2},{"col":2,"row":2}]')
+    Dashing.gridsterLayout('[{"col":1,"row":1},{"col":2,"row":1},{"col":4,"row":2},{"col":3,"row":1},{"col":2,"row":2},{"col":3,"row":2},{"col":4,"row":1},{"col":3,"row":3},{"col":2,"row":3},{"col":4,"row":3}]')
     Dashing.widget_base_dimensions = [370, 340]
     Dashing.numColumns = 5
   }
-);
+)
 </script>
 <% content_for(:title) { "Chaosdorf Status" } %>
 <div class="gridster">
@@ -38,5 +38,8 @@
     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
       <div data-view="Graph" data-id="freifunk-total" data-title="Freifunk nodes"></div>
     </li>
-
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-view="Number" data-id="dynip" data-title="dynamic IPs"></div>
+    </li>
+  </ul>
 </div>
