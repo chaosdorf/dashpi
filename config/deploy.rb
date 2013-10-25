@@ -1,14 +1,12 @@
 require 'bundler/capistrano'
 
-set :application, "dashpi"
-set :deploy_to, "/srv/http/dashpi"
+set :application, "dashboard"
+set :deploy_to, "/srv/dashboard"
 set :repository,  "https://github.com/chaosdorf/dashpi"
 set :scm, :git
 set :use_sudo, false
-set :user, "dashpi"
-role :app, "webserver.chaosdorf.dn42"
-role :db, "webserver.chaosdorf.dn42", :primary => true
-role :web, "webserver.chaosdorf.dn42"
+set :user, "dashboard"
+role :web, "dashboardserver.chaosdorf.dn42"
 
 namespace :deploy do
   task :start do ; end
