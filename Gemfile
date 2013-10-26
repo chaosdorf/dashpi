@@ -7,5 +7,5 @@ gem 'twitter'
 gem 'rake'
 
 group :development do
-  gem 'capistrano', '~> 2'
+  gem 'capistrano'
 end

@@ -83,7 +83,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  capistrano (~> 2)
+  capistrano
   dashing
   rake
   ruby-mpd
