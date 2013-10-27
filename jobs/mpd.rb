@@ -5,7 +5,6 @@ SCHEDULER.every '2s', :first_in => 0 do
   song = mpd.current_song
   text = "#{song.artist}<hr />#{song.title}"
   send_event('mpd-status', { text: text })
-  puts "Currently playing: #{text}"
   mpd.disconnect
 end
 

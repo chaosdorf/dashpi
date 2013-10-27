@@ -8,5 +8,4 @@ SCHEDULER.every '1m', :first_in => 0 do |job|
     { :x => y, :y => y }
   }
   send_event('freifunk-total', { points: points })
-  puts "Freifunk Total: #{values.last[0]}"
 end

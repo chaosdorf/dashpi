@@ -4,8 +4,5 @@ SCHEDULER.every '5m', :first_in => 0 do |job|
   value = JSON.parse(json)[0]['datapoints'].last[0]
   if value
     send_event('dynip', { current: value.to_i })
-    puts "Dynamic IPs: #{value}"
-  else
-    puts "Dynamic IPs: error"
   end
 end
