@@ -3,15 +3,15 @@ set :repo_url, 'https://github.com/chaosdorf/dashpi'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
- set :deploy_to, '/srv/dashboard'
+set :deploy_to, '/srv/dashboard'
 # set :scm, :git
 
-# set :format, :pretty
-# set :log_level, :debug
-# set :pty, true
+set :format, :pretty
+set :log_level, :info
+set :pty, true
 
 set :linked_files, %w{.env}
-# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, %w{bin tmp}
 
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 # set :keep_releases, 5
@@ -22,7 +22,7 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
+      execute :touch, release_path.join('tmp/restart.txt')
     end
   end
 

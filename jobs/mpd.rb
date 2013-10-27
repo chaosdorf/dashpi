@@ -4,7 +4,7 @@ def update_dashboard(mpd)
   if mpd.current_song
     artist = "#{mpd.current_song.artist}"
     title = "#{mpd.current_song.title}"
-    text = [artist, title].join(" – ")
+    text = [artist, title].join(" - ")
   else
     text = "[empty playlist]"
   end
@@ -13,7 +13,7 @@ def update_dashboard(mpd)
 end
 
 SCHEDULER.in '0s' do
-  mpd = MPD.new 'mpd.chaosdorf.dn42', 6600, {callbacks: true}
+  mpd = MPD.new 'mpd.chaosdorf.dn42', 6600, {:callbacks => true}
   mpd.connect
   update_dashboard(mpd)
   mpd.on :volume do |volume|
