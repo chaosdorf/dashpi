@@ -1,4 +1,7 @@
 require 'twitter'
+require 'dotenv'
+
+Dotenv.load
 
 rest_client = Twitter::REST::Client.new do |config|
   ['consumer_key', 'consumer_secret', 'access_token', 'access_token_secret'].each do |c|

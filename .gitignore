@@ -1,3 +1,5 @@
 .bundle
+.env
 vendor/bundle
 bin
+history.yml

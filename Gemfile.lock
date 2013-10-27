@@ -25,6 +25,7 @@ GEM
       sprockets
       thin
       thor
+    dotenv (0.9.0)
     eventmachine (1.0.3)
     execjs (2.0.2)
     faraday (0.8.8)
@@ -100,6 +101,7 @@ DEPENDENCIES
   capistrano
   capistrano-bundler
   dashing
+  dotenv
   rake
   ruby-mpd
   twitter (~> 5.0.0.rc.1)

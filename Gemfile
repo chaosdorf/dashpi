@@ -5,6 +5,7 @@ gem 'xml-simple'
 gem 'ruby-mpd'
 gem 'twitter', '~> 5.0.0.rc.1'
 gem 'rake'
+gem 'dotenv'
 
 group :development do
   gem 'capistrano'
