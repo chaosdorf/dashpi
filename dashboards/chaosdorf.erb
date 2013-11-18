@@ -1,6 +1,6 @@
 <script type='text/javascript'>
   $(function() {
-    Dashing.gridsterLayout('[{"col":1,"row":1},{"col":2,"row":1},{"col":4,"row":2},{"col":3,"row":1},{"col":2,"row":2},{"col":3,"row":2},{"col":4,"row":1},{"col":1,"row":2},{"col":1,"row":3},{"col":4,"row":3},{"col":2,"row":3}]')
+    Dashing.gridsterLayout('[{"col":1,"row":1},{"col":2,"row":1},{"col":4,"row":1},{"col":3,"row":1},{"col":2,"row":2},{"col":3,"row":2},{"col":4,"row":2},{"col":1,"row":2},{"col":1,"row":3},{"col":4,"row":3},{"col":2,"row":3}]')
     Dashing.widget_base_dimensions = [370, 340]
     Dashing.numColumns = 5
   }
@@ -23,15 +23,15 @@
       <div data-view="Text" data-id="chaosdoor-mode" data-title="Chaosdoor Mode" style="background-color: #b82543;"></div>
     </li>
     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-view="Meter" data-id="uplink-traffic" style="background-color: #333;" data-min="0" data-max="5000000" data-title="Uplink Traffic" ></div>
-      <i class="icon-arrow-up icon-background"></i>
-    </li>
-    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
       <div data-view="Meter" data-id="downlink-traffic" style="background-color: #333;" data-min="0" data-max="100000000" data-title="Downlink Traffic" ></div>
       <i class="icon-arrow-down icon-background"></i>
     </li>
     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
-      <div data-id="temp" data-view="Number" data-title="Hackcenter Temperature" data-suffix=" °C" style="background-color: #25b893"></div>
+      <div data-view="Meter" data-id="uplink-traffic" style="background-color: #333;" data-min="0" data-max="5000000" data-title="Uplink Traffic" ></div>
+      <i class="icon-arrow-up icon-background"></i>
+    </li>
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-view="Number" data-id="power-total" data-title="power consumption" style="background-color: #93b825"></div>
     </li>
     <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
       <div data-view="Text" data-id="mpd-status" data-title="now playing" style="background-color: #25b893"></div>
