@@ -12,9 +12,9 @@ def update_dashboard(mpd)
   send_event('mpd-status', { text: text })
 end
 
+mpd = MPD.new 'mpd.chaosdorf.dn42', 6600, {:callbacks => true}
+mpd.connect
 SCHEDULER.every '5s', :first_in => '5s' do |job|
-  mpd = MPD.new 'mpd.chaosdorf.dn42', 6600, {:callbacks => true}
-  mpd.connect
   update_dashboard(mpd)
   mpd.on :volume do |volume|
     update_dashboard(mpd)
