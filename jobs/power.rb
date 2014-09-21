@@ -7,5 +7,4 @@ SCHEDULER.every '1s', :first_in => 0 do |job|
     value += JSON.parse(json)[-2][1].to_i
   end
   send_event('power-total', { current: value })
-  puts value
 end
