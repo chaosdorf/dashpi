@@ -7,6 +7,7 @@ gem 'twitter'
 gem 'rake'
 gem 'dotenv'
 gem 'haml'
+gem 'net-ping'
 
 group :development do
   gem 'capistrano'
