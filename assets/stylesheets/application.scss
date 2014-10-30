@@ -104,9 +104,13 @@ h2 {
   color: $text-color;
 }
 h3 {
-  font-size: 25px;
+  font-size: 36px;
   font-weight: 600;
   color: $text-color;
+}
+
+div[data-id=chaosdoor-mode] h3 {
+  font-size: 50px;
 }
 
 // ----------------------------------------------------------------------------
