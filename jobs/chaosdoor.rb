@@ -4,7 +4,7 @@ SCHEDULER.every '10s', :first_in => 0 do
   status = "normal"
   if value != last
     status = "warning"
-  elsif value = "open\n"
+  elsif value == "open\n"
     status = "danger"
   end
   send_event('chaosdoor-mode', { text: value, status: status} )
