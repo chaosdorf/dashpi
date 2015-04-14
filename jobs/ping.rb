@@ -20,6 +20,6 @@ SCHEDULER.every '5s', :first_in => 0 do |job|
   else
     status = "warning"
   end
-  data = series.map.with_index{ |n,i| {"x" => i, "y" => n} }
+  data = series.map.with_index{ |n,i| {"x" => -i, "y" => n} }
   send_event('ping', { points: data, status: status, moreinfo: "$ ping speedtest.unitymedia.de" })
 end
