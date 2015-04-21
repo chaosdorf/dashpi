@@ -31,7 +31,8 @@ def get_power_metrics(sensors)
     interval = Time.now - Time.at(key)
     { "x" => interval.to_i, "y" => value}
   end
-  results.delete_at(-1) # newest value is often too low
+  results.delete_at(-1) # newest two values are often too low
+  results.delete_at(-1)
   return results
 end
 
