@@ -1,4 +1,4 @@
 set :stage, :production
 
-role :app, %w{dashboard@dashboardserver.chaosdorf.dn42}
+role :app, %w{dashpi@dashpiserver.chaosdorf.dn42}
 
