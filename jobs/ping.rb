@@ -1,7 +1,7 @@
 # :first_in sets how long it takes before the job is first run. In this case, it is run immediately
 require 'net/ping/tcp'
 
-host = "80.69.100.220" # speedtest.unitymedia.de
+host = "80.69.100.221" # speedtest-2.unitymedia.de
 series = Array.new(5).fill(0)
 
 SCHEDULER.every '5s', :first_in => 0 do |job|
