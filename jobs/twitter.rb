@@ -9,12 +9,11 @@ rest_client = Twitter::REST::Client.new do |config|
   end
 end
 
-tweets = []
-
 SCHEDULER.every '60s' do
   mentions = rest_client.mentions_timeline
+  tweets = []
   mentions.take(5).each do |t|
     tweets << {name: t.user.name, body: t.text, avatar: t.user.profile_image_url}
-    send_event 'twitter_mentions', comments: tweets
   end
+  send_event 'twitter_mentions', comments: tweets
 end
