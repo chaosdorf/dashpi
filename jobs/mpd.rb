@@ -14,12 +14,10 @@ end
 
 mpd = MPD.new 'mpd.chaosdorf.dn42', 6600, {:callbacks => true}
 mpd.connect
-SCHEDULER.every '5s', :first_in => '5s' do |job|
+update_dashboard(mpd)
+mpd.on :volume do |volume|
   update_dashboard(mpd)
-  mpd.on :volume do |volume|
-    update_dashboard(mpd)
-  end
-  mpd.on :song do |song|
-    update_dashboard(mpd)
-  end
+end
+mpd.on :song do |song|
+  update_dashboard(mpd)
 end
