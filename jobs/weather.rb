@@ -12,7 +12,7 @@ woe_id = 646099
 format = 'c'
 
 SCHEDULER.every '15m', :first_in => 0 do |job|
-  http = Net::HTTP.new('weather.yahooapis.com')
+  http = Net::HTTP.new('xml.weather.yahoo.com') #via https://stackoverflow.com/a/36262971
   response = http.request(Net::HTTP::Get.new("/forecastrss?w=#{woe_id}&u=#{format}"))
   weather_data = XmlSimple.xml_in(response.body, { 'ForceArray' => false })['channel']['item']['condition']
   weather_location = XmlSimple.xml_in(response.body, { 'ForceArray' => false })['channel']['location']
