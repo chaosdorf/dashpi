@@ -8,6 +8,7 @@ gem 'rake'
 gem 'dotenv'
 gem 'haml'
 gem 'net-ping'
+gem 'therubyracer'
 
 group :development do
   gem 'capistrano'
