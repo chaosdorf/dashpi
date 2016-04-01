@@ -2,7 +2,7 @@
 require 'net/ping/tcp'
 
 host = "speedtest.unitymedia.de"
-series = Array.new(5).fill(0)
+series = Array.new(20).fill(0)
 
 SCHEDULER.every '5s', :first_in => 0 do |job|
   series.rotate!
