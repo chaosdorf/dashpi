@@ -24,7 +24,7 @@ rest_client = Twitter::REST::Client.new do |config|
   end
 end
 
-SCHEDULER.every '5m', :first_in => 0 do |job|
+SCHEDULER.every '5m', :overlap => false, :first_in => 0 do |job|
   mentions = rest_client.mentions_timeline
   mentions.take(count_tweets).each do |tweet|
     add_tweet(tweets, tweet)
