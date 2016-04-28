@@ -1,124 +1,40 @@
+# encoding: utf-8
+
 require 'net/http'
 require 'xmlsimple'
 
-# Get a WOEID (Where On Earth ID)
-# for your location from here:
-# http://woeid.rosselliot.co.nz/
-woe_id = 646099
-
-# Temerature format:
-# 'c' for Celcius
-# 'f' for Fahrenheit
-format = 'c'
-
-SCHEDULER.every '15m', :first_in => 0 do |job|
-  response = Net::HTTP.get('xml.weather.yahoo.com', "/forecastrss?w=#{woe_id}&u=#{format}") #via https://stackoverflow.com/a/36262971
-  weather_data = XmlSimple.xml_in(response, { 'ForceArray' => false })['channel']['item']['condition']
-  weather_location = XmlSimple.xml_in(response, { 'ForceArray' => false })['channel']['location']
-  send_event('weather', { :temp => "#{weather_data['temp']}&deg;#{format.upcase}",
-                          :condition => weather_data['text'],
-                          :title => "#{weather_location['city']} Weather",
-                          :climacon => climacon_class(weather_data['code'])})
+SCHEDULER.every '1h', :first_in => 0 do |job|
+  response = Net::HTTP.get("www.yr.no", "/place/Germany/North_Rhine-Westphalia/Düsseldorf/forecast.xml")
+  xml = XmlSimple.xml_in(response)
+  location = xml["location"][0]["name"][0]
+  weather_data = []
+  xml["forecast"][0]["tabular"][0]["time"].each do |data|
+    weather_data << {time: "#{data["from"]} - #{data["to"]}",
+		 condition: data["symbol"][0]["name"],
+		 symbol: climacon_class(data["symbol"][0]["name"]),
+		 temp: "#{data["temperature"][0]["value"]}°C"}
+  end
+  send_event('weather', { :title => "Wetter für #{location}",
+                          :weather_data => weather_data})
 end
 
 
 def climacon_class(weather_code)
-  case weather_code.to_i
-  when 0
-    'tornado'
-  when 1
-    'tornado'
-  when 2
-    'tornado'
-  when 3
-    'lightning'
-  when 4
-    'lightning'
-  when 5
-    'snow'
-  when 6
-    'sleet'
-  when 7
-    'snow'
-  when 8
+  #see https://github.com/christiannaths/Climacons-Font/blob/master/webfont/climacons-font.css
+  case weather_code
+  when "Light rain"
     'drizzle'
-  when 9
+  when "Light rain showers"
     'drizzle'
-  when 10
-    'sleet'
-  when 11
+  when "Rain"
     'rain'
-  when 12
-    'rain'
-  when 13
-    'snow'
-  when 14
-    'snow'
-  when 15
-    'snow'
-  when 16
-    'snow'
-  when 17
-    'hail'
-  when 18
-    'sleet'
-  when 19
-    'haze'
-  when 20
-    'fog'
-  when 21
-    'haze'
-  when 22
-    'haze'
-  when 23
-    'wind'
-  when 24
-    'wind'
-  when 25
-    'thermometer low'
-  when 26
+  when "Rain showers"
+    'showers'
+  when "Cloudy"
     'cloud'
-  when 27
-    'cloud moon'
-  when 28
-    'cloud sun'
-  when 29
-    'cloud moon'
-  when 30
-    'cloud sun'
-  when 31
-    'moon'
-  when 32
-    'sun'
-  when 33
-    'moon'
-  when 34
-    'sun'
-  when 35
-    'hail'
-  when 36
-    'thermometer full'
-  when 37
-    'lightning'
-  when 38
-    'lightning'
-  when 39
-    'lightning'
-  when 40
-    'rain'
-  when 41
-    'snow'
-  when 42
-    'snow'
-  when 43
-    'snow'
-  when 44
-    'cloud'
-  when 45
-    'lightning'
-  when 46
-    'snow'
-  when 47
-    'lightning'
+  when "Partly cloudy"
+    'cloud sun' #TODO: check time (-> "cloud moon" at night)
+  when "Clear sky"
+    'sun' #TODO: check time (-> "moon" at night)
   end
 end
