@@ -1,7 +1,8 @@
 <h1 class="title" data-bind="title"></h1>
-
-<h2 class="temp" data-bind="temp | raw"></h2>
-
-<p class="condition" data-bind="condition"></p>
-
+<div class="weather-container">
+  <i class="climacon icon-background"></i>
+  <h2 class="temp" data-bind="current_weather.temp"></h2>
+  <p class="condition" data-bind="current_weather.condition"></p>
+  <p class="time" data-bind="current_weather.time"></p>
+</div>
 <p class="updated-at" data-bind="updatedAtMessage"></p>
