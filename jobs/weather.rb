@@ -34,7 +34,7 @@ def format_time(from, to, index)
 	timeofday = ""
 	#timeofday
 	if ft.hour == 0 and tt.hour == 6
-		timeofday = "Morgen"
+		timeofday = "früh"
 	end
 	if ft.hour == 6 and tt.hour == 12
 		timeofday = "Vormittag"
