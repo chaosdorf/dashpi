@@ -9,11 +9,12 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
   response = Net::HTTP.get("www.yr.no", "/place/Germany/North_Rhine-Westphalia/Düsseldorf/forecast.xml")
   xml = XmlSimple.xml_in(response)
   location = xml["location"][0]["name"][0]
+	sun = xml["sun"][0]
   weather_data = []
   xml["forecast"][0]["tabular"][0]["time"][0...9].each_with_index do |data, index| #today and two days after
     weather_data << {time: format_time(data["from"], data["to"], index),
 		 condition: data["symbol"][0]["name"],
-		 symbol: climacon_class(data["symbol"][0]["name"]),
+		 symbol: climacon_class(data["symbol"][0]["name"], is_sunlight(data["from"], data["to"], sun)),
 		 temp: "#{data["temperature"][0]["value"]}°C"}
   end
   send_event('weather', { :title => "Wetter für #{location}",
@@ -61,22 +62,50 @@ def format_time(from, to, index)
 	return "#{day} #{timeofday}"
 end
 
-def climacon_class(weather_code)
+def is_sunlight(from, to, sun)
+	risehour = Time.parse(sun["rise"]).hour
+	sethour = Time.parse(sun["set"]).hour
+	fromhour = Time.parse(fromtime).hour
+	tohour = Time.parse(totime).hour
+	#close enough
+	return (fromhour.between?(risehour, sethour) and tohour.between?(risehour, sethour))
+end
+
+
+def climacon_class(weather_code, sunlight)
   #see https://github.com/christiannaths/Climacons-Font/blob/master/webfont/climacons-font.css
-  case weather_code
-  when "Light rain"
-    'drizzle'
-  when "Light rain showers"
-    'drizzle'
-  when "Rain"
-    'rain'
-  when "Rain showers"
-    'showers'
-  when "Cloudy"
-    'cloud'
-  when "Partly cloudy"
-    'cloud sun' #TODO: check time (-> "cloud moon" at night)
-  when "Clear sky"
-    'sun' #TODO: check time (-> "moon" at night)
+	#see https://github.com/AdamWhitcroft/Climacons/tree/master/SVG
+  if weather_code == "Light rain"
+    return 'drizzle'
+	end
+  if weather_code == "Light rain showers" and sunlight
+    return 'drizzle sun'
+	end
+	if weather_code == "Light rain showers" and not sunlight
+    return 'drizzle moon'
+	end
+  if weather_code == "Rain"
+    return 'rain'
+	end
+	if weather_code == "Rain showers" and sunlight
+	  return 'rain sun'
+	end
+	if weather_code == "Rain showers" and not sunlight
+	  return 'rain moon'
+	end
+  if weather_code == "Cloudy"
+    return 'cloud'
+	end
+  if weather_code == "Partly cloudy" and sunlight
+    return 'cloud sun'
+	end
+	if weather_code == "Partly cloudy" and not sunlight
+		return 'cloud moon'
+	end
+  if weather_code == "Clear sky" and sunlight
+    return 'sun'
+	end
+	if weather_code == "Clear sky" and not sunlight
+		return 'moon'
   end
 end
