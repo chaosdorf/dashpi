@@ -8,7 +8,7 @@ SCHEDULER.every '1h', :first_in => 0 do |job|
   xml = XmlSimple.xml_in(response)
   location = xml["location"][0]["name"][0]
   weather_data = []
-  xml["forecast"][0]["tabular"][0]["time"].each do |data|
+  xml["forecast"][0]["tabular"][0]["time"][0...9].each do |data| #today and two days after
     weather_data << {time: "#{data["from"]} - #{data["to"]}",
 		 condition: data["symbol"][0]["name"],
 		 symbol: climacon_class(data["symbol"][0]["name"]),
