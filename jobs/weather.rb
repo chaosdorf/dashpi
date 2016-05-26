@@ -65,8 +65,8 @@ end
 def is_sunlight(from, to, sun)
 	risehour = Time.parse(sun["rise"]).hour
 	sethour = Time.parse(sun["set"]).hour
-	fromhour = Time.parse(fromtime).hour
-	tohour = Time.parse(totime).hour
+	fromhour = Time.parse(from).hour
+	tohour = Time.parse(to).hour
 	#close enough
 	return (fromhour.between?(risehour, sethour) and tohour.between?(risehour, sethour))
 end
