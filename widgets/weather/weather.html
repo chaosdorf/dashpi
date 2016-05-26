@@ -1,8 +1,19 @@
 <h1 class="title" data-bind="title"></h1>
 <div class="weather-container">
-  <i class="climacon icon-background"></i>
-  <h2 class="temp" data-bind="current_weather.temp"></h2>
-  <p class="condition" data-bind="current_weather.condition"></p>
-  <p class="time" data-bind="current_weather.time"></p>
+  <i id="climacon-background" class="climacon icon-background"></i>
+  <h2 class="temp" data-bind="now.temp"></h2>
+  <p class="condition" data-bind="now.condition"></p>
+	<p class="forecast">
+		+1h:&nbsp;
+		<span data-bind="onehour.temp"></span>&nbsp;
+		<span data-bind="onehour.condition"></span>&nbsp;
+		<i id="climacon-onehour" class="climacon"></i>
+	</p>
+	<p class="forecast">
+		+2h:&nbsp;
+		<span data-bind="twohour.temp"></span>&nbsp;
+		<span data-bind="twohour.condition"></span>&nbsp;
+		<i id="climacon-twohour" class="climacon"></i>
+	</p>
 </div>
 <p class="updated-at" data-bind="updatedAtMessage"></p>
