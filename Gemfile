@@ -14,3 +14,7 @@ group :development do
   gem 'capistrano'
   gem 'capistrano-bundler'
 end
+
+group :productio do
+  gem 'sentry-raven'
+end
