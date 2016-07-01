@@ -10,6 +10,6 @@ gem 'haml'
 gem 'net-ping'
 gem 'therubyracer'
 
-group :productio do
+group :production do
   gem 'sentry-raven'
 end
