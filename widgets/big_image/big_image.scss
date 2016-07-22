@@ -9,8 +9,7 @@ $background-color:  #4b4b4b;
 div.widget-big-image {
     padding: 0;
     background-color: $background-color;
-
-    video {
-        width: 100%
-    }
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
