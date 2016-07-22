@@ -33,6 +33,7 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
     height: 100%;
     top: 0;
     left: 0;
+    overflow: hidden;
     h3 {
       position: absolute;
       bottom: 10px;
@@ -45,7 +46,7 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
     p {
       position: absolute;
       top: 10px;
-      word-break: break-all;
+      word-break: normal;
     }
   }
 
@@ -54,7 +55,7 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
   }
 
   .comment {
-    font-size: 250%;
+    font-size: 30px;
   }
 
 }
