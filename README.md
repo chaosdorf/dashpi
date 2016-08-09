@@ -33,4 +33,4 @@ cd dashpi
 bundle install
 ```
 
-Check out http://shopify.github.com/dashing for more information.
+Check out http://dashing.io/ for more information.
