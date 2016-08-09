@@ -7,7 +7,7 @@ sudo apt install ruby ruby-dev build-essential git bundler
 sudo gem install dashing
 git clone https://github.com/chaosdorf/dashpi.git
 cd dashpi
-bundle
+bundle install
 ```
 
 ## Run ##
@@ -26,8 +26,11 @@ cd dashpi
 git pull
 ```
 
-**TODO**: *How to update anything else.*
+## Update dependencies ##
 
-
+```
+cd dashpi
+bundle install
+```
 
 Check out http://shopify.github.com/dashing for more information.
