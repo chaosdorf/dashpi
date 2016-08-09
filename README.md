@@ -4,7 +4,6 @@
 
 ```
 sudo apt install ruby ruby-dev build-essential git bundler
-sudo gem install dashing
 git clone https://github.com/chaosdorf/dashpi.git
 cd dashpi
 bundle install
