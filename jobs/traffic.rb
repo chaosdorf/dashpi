@@ -2,8 +2,8 @@
 SCHEDULER.every '5s', :first_in => 0 do |job|
   rx = Hash.new
   tx = Hash.new
-  rx['value'] = Net::HTTP.get('feedback', '/snmp/ops_in')
-  tx['value'] = Net::HTTP.get('feedback', '/snmp/ops_out')
+  rx['value'] = Net::HTTP.get('feedback', '/snmp/ops_in').to_i
+  tx['value'] = Net::HTTP.get('feedback', '/snmp/ops_out').to_i
   case tx['value']
   when 0..3000000
     tx['status'] = "normal"
