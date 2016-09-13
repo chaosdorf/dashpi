@@ -9,17 +9,25 @@ SCHEDULER.every '5s', :first_in => 0 do |job|
   probe = Net::Ping::TCP.new(host)
   probe.port = 80
   probe.ping
-  value = (probe.duration * 1000).round()
-  status = "normal"
-  series[0] = value
-  case value
-  when 0..100
+  begin
+    value = (probe.duration * 1000).round()
     status = "normal"
-  when 100..200
-    status = "danger"
-  else
+    series[0] = value
+    case value
+    when 0..100
+      status = "normal"
+    when 100..200
+      status = "danger"
+    else
+      status = "warning"
+    end
+    down = false
+  rescue NoMethodError
     status = "warning"
+    series[0] = 0
+    down = true
   end
   data = series.map.with_index{ |n,i| {"x" => -i, "y" => n} }
-  send_event('ping', { points: data, status: status, moreinfo: "$ ping speedtest.unitymedia.de" })
+  send_event('ping', { points: data, status: status, moreinfo: "$ ping speedtest.unitymedia.de #{down ? "is down" : ""}" })
+
 end
