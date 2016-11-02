@@ -31,7 +31,7 @@ SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
   end
   
   send_event 'twitter_mentions', comments: tweets
-  streaming_client.filter(track: 'chaosdorf,#dorfleaks') do |tweet|
+  streaming_client.filter(track: 'chaosdorf,#dorfleaks,Dorfkueche') do |tweet|
     add_tweet(tweets, tweet)
     send_event 'twitter_mentions', comments: tweets
   end
