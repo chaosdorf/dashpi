@@ -1,12 +1,10 @@
-last = "unknown"
-SCHEDULER.every '10s', :first_in => 0 do
-  value = Net::HTTP.get('door.chaosdorf.dn42','/status')
-  status = "normal"
-  if value != last
-    status = "warning"
-  elsif value == "open\n"
-    status = "danger"
+require 'mqtt'
+
+SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
+  MQTT::Client.connect('mqttserver') do |client|
+    client.subscribe('door/status')
+    client.get do |topic,message|
+      send_event('chaosdoor-mode', { text: message } )
+    end
   end
-  send_event('chaosdoor-mode', { text: value, status: status} )
-  last = value
 end
