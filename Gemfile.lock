@@ -44,6 +44,7 @@ GEM
     libv8 (3.16.14.15)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
+    mqtt (0.4.0)
     multi_json (1.12.1)
     multipart-post (2.0.0)
     naught (1.1.0)
@@ -113,6 +114,7 @@ DEPENDENCIES
   dashing
   dotenv
   haml
+  mqtt
   net-ping
   rake
   ruby-mpd
