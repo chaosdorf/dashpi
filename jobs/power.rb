@@ -6,9 +6,9 @@ SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
   MQTT::Client.connect('mqttserver') do |client|
     client.subscribe('sensors/flukso/power/sum/30s_average')
     client.get do |topic,message|
-      series.rotate!
       value = Float(message).round
       series[0] = value
+      series.rotate!
       case value
       when 0..1500
         status = "normal"

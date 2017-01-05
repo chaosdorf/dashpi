@@ -8,8 +8,8 @@ count_tweets = 10
 tweets = Array.new(count_tweets).fill({name: '', body: '', avatar: ''})
 
 def add_tweet(tweets, tweet)
-  tweets.rotate!
   tweets[0] = {name: tweet.user.name, body: tweet.text, avatar: tweet.user.profile_image_url}
+  tweets.rotate!
 end
 
 streaming_client = Twitter::Streaming::Client.new do |config|
@@ -29,7 +29,7 @@ SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
   mentions.take(count_tweets).each do |tweet|
     add_tweet(tweets, tweet)
   end
-  
+
   send_event 'twitter_mentions', comments: tweets
   streaming_client.filter(track: 'chaosdorf,#dorfleaks,Dorfkueche') do |tweet|
     add_tweet(tweets, tweet)

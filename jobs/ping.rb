@@ -5,7 +5,6 @@ host = "speedtest.unitymedia.de"
 series = Array.new(20).fill(0)
 
 SCHEDULER.every '5s', :first_in => 0 do |job|
-  series.rotate!
   probe = Net::Ping::TCP.new(host)
   probe.port = 80
   probe.ping
@@ -27,6 +26,7 @@ SCHEDULER.every '5s', :first_in => 0 do |job|
     series[0] = 0
     down = true
   end
+  series.rotate!
   data = series.map.with_index{ |n,i| {"x" => -i, "y" => n} }
   send_event('ping', { points: data, status: status, moreinfo: "$ ping speedtest.unitymedia.de #{down ? "is down" : ""}" })
 
