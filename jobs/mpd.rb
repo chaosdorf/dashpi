@@ -5,8 +5,8 @@ def update_dashboard(mpd)
     if mpd.current_song.artist.nil?
       text = mpd.current_song.title
     else
-      artist = "#{mpd.current_song.artist}"
-      title = "#{mpd.current_song.title}"
+      artist = mpd.current_song.artist
+      title = mpd.current_song.title
       text = [artist, title].join(" - ")
     end
   else
