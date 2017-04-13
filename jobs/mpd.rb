@@ -27,7 +27,19 @@ def connect(mpd)
   end
 end
 
-mpd = MPD.new 'mpd.chaosdorf.dn42', 6600, {:callbacks => true}
+def new
+  MPD.new 'mpd.chaosdorf.dn42', 6600, {:callbacks => true}
+end
+
+mpd = new
 SCHEDULER.every '5m', :first_in => 0 do |job|
-  connect(mpd) unless mpd.connected?
+  begin
+    connect(mpd) unless mpd.connected?
+  rescue MPD::ConnectionError
+    # mpd.connect raised an MPD::ConnectionError.
+    # Let's just throw the whole object away instead of reconnecting.
+    mpd = new
+    connect(mpd)
+    raise # Still log this.
+  end
 end
