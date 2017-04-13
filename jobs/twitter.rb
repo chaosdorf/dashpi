@@ -1,5 +1,6 @@
 require 'twitter'
 require 'dotenv'
+require 'cgi'
 
 Dotenv.load
 
@@ -8,7 +9,7 @@ count_tweets = 10
 tweets = Array.new(count_tweets).fill({name: '', body: '', avatar: ''})
 
 def add_tweet(tweets, tweet)
-  tweets[0] = {name: tweet.user.name, body: tweet.text, avatar: tweet.user.profile_image_url}
+  tweets[0] = {name: CGI.unescapeHTML tweet.user.name, body: CGI.unescapeHTML tweet.text, avatar: tweet.user.profile_image_url}
   tweets.rotate!
 end
 
