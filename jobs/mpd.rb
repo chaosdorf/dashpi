@@ -3,17 +3,16 @@ require 'ruby-mpd'
 def update_dashboard(mpd)
   if mpd.current_song
     if mpd.current_song.artist.nil?
-      text = mpd.current_song.title
+      song = mpd.current_song.title
     else
       artist = mpd.current_song.artist
       title = mpd.current_song.title
-      text = [artist, title].join(" - ")
+      song = [artist, title].join(" - ")
     end
   else
-    text = "[empty playlist]"
+    song = "[empty playlist]"
   end
-  text += "<br><small>Volume: #{mpd.volume}%</small><br>"
-  send_event('mpd-status', { text: text })
+  send_event('mpd-status', { song: song, volume: mpd.volume })
 end
 
 def connect(mpd)
