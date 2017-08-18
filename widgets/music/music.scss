@@ -12,8 +12,18 @@ $title-color:       rgba(255, 255, 255, 0.7);
 
   background-color: $background-color;
 
-  .title {
+  .header {
     color: $title-color;
+  }
+  
+  .artist, .album {
+    color: $title-color;
+    font-size: 25px;
+  }
+  
+  .source {
+    color: $title-color;
+    font-size: 20px;
   }
 
   .updated-at {

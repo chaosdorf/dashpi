@@ -1,9 +1,13 @@
-<h1 class="title" data-bind="title"></h1>
+<h1 class="header" data-bind="header"></h1>
 
 <h3>
-  <span data-bind="song"></span>
+  <span class="title" data-bind="title"></span>
   <br />
-  <small>Volume: <span data-bind="volume"></span>%</small>
+  <span class="artist" data-bind="artist"></span>
+  <br />
+  <span class="album" data-bind="album"></span>
+  <br />
+  <p class="source">src: <span data-bind="source"></span></p>
 </h3>
 
 <p class="updated-at" data-bind="updatedAtMessage"></p>
