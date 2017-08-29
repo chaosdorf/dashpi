@@ -11,6 +11,7 @@ SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
     client.subscribe('music/#') # music
 
     client.get do |topic,message|
+      message = message.force_encoding('utf-8')
       if topic == 'sensors/flukso/power/sum/30s_average'
         ##################################
         # P O W E R                      #
