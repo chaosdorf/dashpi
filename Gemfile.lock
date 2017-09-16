@@ -58,7 +58,6 @@ GEM
       rack (>= 1.0, < 3)
     rake (12.1.0)
     ref (2.0.0)
-    ruby-mpd (0.3.3)
     rufus-scheduler (2.0.24)
       tzinfo (>= 0.3.22)
     sass (3.2.19)
@@ -119,7 +118,6 @@ DEPENDENCIES
   mqtt
   net-ping
   rake
-  ruby-mpd
   sentry-raven
   therubyracer
   twitter
