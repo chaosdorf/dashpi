@@ -16,6 +16,10 @@ $background-danger-color-1: #eeae32;
 $background-danger-color-2: #ff9618;
 $text-danger-color: #fff;
 
+$widget-width: 350px;
+$widget-height: 287px;
+$widget-margin: 5px;
+
 @-webkit-keyframes status-warning-background {
   0%   { background-color: $background-warning-color-1; }
   50%  { background-color: $background-warning-color-2; }
@@ -82,11 +86,6 @@ td {
   vertical-align: middle;
 }
 
-ul, ol {
-  padding: 0;
-  margin: 0;
-}
-
 h1, h2, h3, h4, h5, p {
   padding: 0;
   margin: 0;
@@ -115,8 +114,15 @@ div[data-id=chaosdoor-mode] h3 {
 // ----------------------------------------------------------------------------
 // Base widget styles
 // ----------------------------------------------------------------------------
-.gridster {
+.grid {
   margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
 }
 
 .icon-background {
@@ -133,10 +139,6 @@ div[data-id=chaosdoor-mode] h3 {
   list-style: none;
 }
 
-.gridster ul {
-  list-style: none;
-}
-
 .gs_w {
   width: 100%;
   display: table;
@@ -144,11 +146,20 @@ div[data-id=chaosdoor-mode] h3 {
 }
 
 .widget {
-  padding: 25px 12px;
   text-align: center;
-  width: 100%;
-  display: table-cell;
-  vertical-align: middle;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  flex-direction: column;
+  margin: $widget-margin;
+  width: $widget-width;
+  height: $widget-height;
+}
+
+.widget[data-span-rows="2"] {
+  width: 2 * $widget-width;
+  padding-left: $widget-margin;
+  padding-right: $widget-margin;
 }
 
 .widget.status-warning {
@@ -180,7 +191,6 @@ div[data-id=chaosdoor-mode] h3 {
 
 .more-info {
   font-size: 15px;
-  position: absolute;
   bottom: 32px;
   left: 0;
   right: 0;
@@ -188,60 +198,9 @@ div[data-id=chaosdoor-mode] h3 {
 
 .updated-at {
   font-size: 15px;
-  position: absolute;
   bottom: 12px;
   left: 0;
   right: 0;
-}
-
-#save-gridster {
-  display: none;
-  position: fixed;
-  top: 0;
-  margin: 0px auto;
-  left: 50%;
-  z-index: 1000;
-  background: black;
-  width: 190px;
-  text-align: center;
-  border: 1px solid white;
-  border-top: 0px;
-  margin-left: -95px;
-  padding: 15px;
-}
-
-#save-gridster:hover {
-  padding-top: 25px;
-}
-
-#saving-instructions {
-  display: none;
-  padding: 10px;
-  width: 500px;
-  height: 122px;
-  z-index: 1000;
-  background: white;
-  top: 100px;
-  color: black;
-  font-size: 15px;
-  padding-bottom: 4px;
-
-  textarea {
-    white-space: nowrap;
-    width: 494px;
-    height: 80px;
-  }
-}
-
-#lean_overlay {
-    position: fixed;
-    z-index:100;
-    top: 0px;
-    left: 0px;
-    height:100%;
-    width:100%;
-    background: #000;
-    display: none;
 }
 
 #container {

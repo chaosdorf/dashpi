@@ -13,12 +13,3 @@
   %body
     #container
       = yield
-    - if development?
-      #saving-instructions
-        %p
-          Paste the following at the top of
-          %i
-            = params[:dashboard]
-            \.erb
-        %textarea#gridster-code
-      %a#save-gridster{:href => "#saving-instructions"} Save this layout
