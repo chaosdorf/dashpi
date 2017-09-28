@@ -13,7 +13,7 @@ bundle install
 
 ```
 cd dashpi
-dashing start
+smashing start
 ```
 
 **TODO**: *Set environment variables for Twitter auth.*
@@ -32,4 +32,4 @@ cd dashpi
 bundle install
 ```
 
-Check out http://dashing.io/ for more information.
+Check out https://smashing.github.io/ for more information.

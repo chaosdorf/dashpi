@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'dashing'
+gem 'smashing'
 gem 'xml-simple'
 gem 'twitter'
 gem 'rake'
