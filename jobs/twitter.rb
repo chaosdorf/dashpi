@@ -16,6 +16,10 @@ end
 
 rest_client = Twitter::REST::Client.new do |config|
   ['consumer_key', 'consumer_secret', 'access_token', 'access_token_secret'].each do |c|
+    unless ENV["TWITTER_#{c.upcase}"]
+      puts 'Missing Twitter Credentials, ignoring twitter'
+      return
+    end
     config.send( "#{c}=", ENV["TWITTER_#{c.upcase}"] )
   end
 end
@@ -28,13 +32,13 @@ send_event 'twitter_mentions', comments: tweets
 
 def init_and_stream
   puts "(Re)starting Twitter stream..."
-  
+
   streaming_client = Twitter::Streaming::Client.new do |config|
     ['consumer_key', 'consumer_secret', 'access_token', 'access_token_secret'].each do |c|
       config.send( "#{c}=", ENV["TWITTER_#{c.upcase}"] )
     end
   end
-  
+
   streaming_client.filter(track: 'chaosdorf,#dorfleaks,Dorfkueche') do |tweet|
     add_tweet(tweets, tweet)
     send_event 'twitter_mentions', comments: tweets
