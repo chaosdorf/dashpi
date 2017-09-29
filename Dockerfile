@@ -1,7 +1,7 @@
 # Use an official runtime as a parent image
 FROM alpine:latest
 
-RUN apk update && apk add ruby ruby-dev ruby-bundler openssl openssl-dev
+RUN apk --update add nodejs python2 ruby ruby-dev ruby-bundler openssl openssl-dev g++ musl-dev make
 
 # user
 RUN addgroup -S app && adduser -S -h /app -G app app
@@ -23,4 +23,4 @@ RUN bundle install --path vendor/bundle
 # Define environment variable
 ENV RAILS_ENV production
 
-CMD bundle exec smashing start
+CMD ["bundle", "exec", "smashing", "start"]

@@ -7,8 +7,8 @@ gem 'rake'
 gem 'dotenv'
 gem 'haml'
 gem 'net-ping'
-gem 'therubyracer'
 gem 'mqtt'
+gem 'json'
 
 group :production do
   gem 'sentry-raven'
