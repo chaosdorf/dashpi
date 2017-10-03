@@ -32,6 +32,6 @@ SCHEDULER.every '1m', :first_in => 0 do |job|
     end
     send_event('efa', data)
   rescue
-    send_event('efa', { status: "danger" })
+    send_event('efa', { :t1 => { :dest => "Couldn't fetch data." }, :t2 => nil, :t3 => nil, :t4 => nil, :status => "danger" })
   end
 end
