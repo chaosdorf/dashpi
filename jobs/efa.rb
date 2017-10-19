@@ -27,7 +27,7 @@ SCHEDULER.every '1m', :first_in => 0 do |job|
       :t4 => json_to_data(pre[3]),
       :status => "normal"
     }
-    if data[:t1][:time] == "sofort"
+    if data[:t4][:time] == ""
       data[:status] = "warning"
     end
     send_event('efa', data)
