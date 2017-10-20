@@ -3,11 +3,13 @@ require 'mqtt'
 power_series = Array.new(20).fill(0)
 music_status = {}
 last_music_update = Time.now
+last_door_state = "unknown"
 
 SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
   MQTT::Client.connect('mqttserver') do |client|
     client.subscribe('sensors/flukso/power/sum/30s_average') # power
     client.subscribe('door/status') # door
+    client.subscribe('space/bell') # door bell
     client.subscribe('music/#') # music
 
     client.get do |topic,message|
@@ -33,7 +35,16 @@ SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
         ##################################
         # D O O R                        #
         ##################################
-        send_event('chaosdoor-mode', { text: message } )
+        last_door_state = message
+        send_event('chaosdoor-mode', { text: message, status: "normal" } )
+      elsif topic == 'space/bell' # message is 'ringdingding'
+        ##################################
+        # R I N G                        #
+        ##################################
+        send_event('chaosdoor-mode', { text: message, status: "danger" } )
+        SCHEDULER.in '10s' do
+          send_event('chaosdoor-mode', { text: last_door_state, status: "normal" } )
+        end
       elsif topic.start_with?('music/')
         ##################################
         # M U S I C                      #
