@@ -43,8 +43,8 @@ html {
   font-size: 100%;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
-  min-width: 100%;
-  min-height: 99%; // prevent a scroll bar
+  width: 100%;
+  height: 99%; // prevent a scroll bar
 }
 
 body {
@@ -53,8 +53,8 @@ body {
   font-size: 20px;
   color: $text-color;
   font-family: 'Roboto', sans-serif;
-  min-width: 100%;
-  min-height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 b, strong {
@@ -83,7 +83,7 @@ iframe {
 table {
   border-collapse: collapse;
   border-spacing: 0;
-  min-width: 100%;
+  width: 100%;
 }
 
 td {
@@ -213,8 +213,8 @@ div[data-id=chaosdoor-mode] h3 {
 
 #container {
   padding-top: 5px;
-  min-width: 100%;
-  min-height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 
