@@ -15,10 +15,18 @@ def json_to_data(data)
   }
 end
 
+def create_error_data(message)
+  return { :t1 => { :dest => message }, :t2 => nil, :t3 => nil, :t4 => nil, :status => "danger" }
+end
+
 # :first_in sets how long it takes before the job is first run. In this case, it is run immediately
 SCHEDULER.every '1m', :first_in => 0 do |job|
   begin
     json = JSON.parse(http.request(request).body)
+    unless json["error"].nil?
+      send_event('efa', create_error_data("Backend not available right now."))
+      return
+    end
     pre = json["preformatted"]
     data = {
       :t1 => json_to_data(pre[0]),
@@ -32,6 +40,6 @@ SCHEDULER.every '1m', :first_in => 0 do |job|
     end
     send_event('efa', data)
   rescue
-    send_event('efa', { :t1 => { :dest => "Couldn't fetch data." }, :t2 => nil, :t3 => nil, :t4 => nil, :status => "danger" })
+    send_event('efa', create_error_data("Couldn't fetch data."))
   end
 end
