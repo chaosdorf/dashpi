@@ -10,7 +10,7 @@ count_tweets = 10
 tweets = Array.new(count_tweets).fill({name: '', body: '', avatar: '', time: Date.today - 14})
 
 def add_tweet(tweets, tweet)
-  tweets[0] = {name: CGI.unescapeHTML(tweet.user.name), body: CGI.unescapeHTML(tweet.text), avatar: tweet.user.profile_image_url, time: tweet.created_at.to_date}
+  tweets[0] = {name: CGI.unescapeHTML(tweet.user.name), body: CGI.unescapeHTML(tweet.text), avatar: tweet.user.profile_image_url_https, time: tweet.created_at.to_date}
   tweets.rotate!
 end
 
