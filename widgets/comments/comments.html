@@ -2,7 +2,10 @@
 <div class="comment-container">
   <h3>
     <img data-bind-src='current_comment.avatar'/>
-    <span data-bind='current_comment.name' class="name"></span>
+    <span class="name">
+      <span data-bind='current_comment.name'></span>
+      (@<span data-bind='current_comment.nickname'></span>)
+    </span>
   </h3>
   <br />
   <p class="comment" data-bind='quote'></p>
