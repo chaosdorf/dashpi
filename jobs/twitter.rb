@@ -1,16 +1,16 @@
 require 'twitter'
 require 'dotenv'
 require 'cgi'
-require 'date'
+require 'time'
 
 Dotenv.load
 
 count_tweets = 10
 
-tweets = Array.new(count_tweets).fill({name: '', nickname: '', body: '', avatar: '', time: Date.today - 14})
+tweets = Array.new(count_tweets).fill({name: '', nickname: '', body: '', avatar: '', time: Time.new - 14*24*60*60})
 
 def add_tweet(tweets, tweet)
-  tweets[0] = {name: CGI.unescapeHTML(tweet.user.name), nickname: tweet.user.screen_name , body: CGI.unescapeHTML(tweet.text), avatar: tweet.user.profile_image_url_https, time: tweet.created_at.to_date}
+  tweets[0] = {name: CGI.unescapeHTML(tweet.user.name), nickname: tweet.user.screen_name , body: CGI.unescapeHTML(tweet.text), avatar: tweet.user.profile_image_url_https, time: tweet.created_at}
   tweets.rotate!
 end
 
@@ -49,7 +49,7 @@ threads = []
 threads << Thread.new {init_and_stream}
 
 SCHEDULER.every '1d', :allow_overlapping => false, :first_in => 0 do |job|
-  if tweets[-1][:time] < Date.today  - 4
+  if tweets[-1][:time] < Time.new  - 4*24*60*60
     threads.each do |thread|
         unless thread.status
           threads.delete_at(threads.index(thread))
