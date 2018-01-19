@@ -1,7 +1,7 @@
 # Use an official runtime as a parent image
 FROM alpine:latest
 
-RUN apk --update add nodejs python2 ruby ruby-dev ruby-bundler openssl openssl-dev g++ musl-dev make
+RUN apk --update add nodejs python2 ruby ruby-dev ruby-bundler openssl openssl-dev g++ musl-dev make tzdata
 
 # user
 RUN addgroup -S app && adduser -S -h /app -G app app
