@@ -49,7 +49,7 @@ SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
         ##################################
         # M U S I C                      #
         ##################################
-        music_status[topic.split('/')[1]] = message
+        music_status['music-'+topic.split('/')[1]] = message
         if last_music_update < (Time.now - 5)
           last_music_update = Time.now
           SCHEDULER.in '1s' do
