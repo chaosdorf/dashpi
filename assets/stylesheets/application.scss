@@ -123,12 +123,14 @@ div[data-id=chaosdoor-mode] h3 {
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow: hidden;
 }
 
 .row {
   display: flex;
   flex-direction: row;
-  flex: 1;
+  flex: 1 0;
+  overflow: hidden;
 }
 
 .icon-background {
@@ -160,14 +162,15 @@ div[data-id=chaosdoor-mode] h3 {
   margin: $widget-margin;
   min-width: $widget-width;
   min-height: $widget-height;
-  flex: 1;
+  flex: 1 0;
+  overflow: hidden;
 }
 
 .widget[data-span-rows="2"] {
   min-width: 2 * $widget-width;
   padding-left: $widget-margin;
   padding-right: $widget-margin;
-  flex: 2;
+  flex: 2 0;
 }
 
 .widget.status-warning {
