@@ -15,5 +15,6 @@ map Sinatra::Application.assets_prefix do
 end
 
 set :template_languages, %i[html erb haml]
+set :show_exceptions, false
 
 run Sinatra::Application
