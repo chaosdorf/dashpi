@@ -69,6 +69,12 @@ def climacon_class(weather_code, sunlight)
   if weather_code == "Clear sky" and sunlight
     return 'sun'
 	end
+  if weather_code == "Fair" and sunlight
+    return 'sun'
+  end
+  if weather_code == "Fair" and not sunlight
+    return 'moon'
+  end
 	if weather_code == "Clear sky" and not sunlight
 		return 'moon'
   end
