@@ -17,11 +17,11 @@ end
 
 rest_client = Twitter::REST::Client.new do |config|
   ['consumer_key', 'consumer_secret', 'access_token', 'access_token_secret'].each do |c|
-    unless ENV["TWITTER_#{c.upcase}"]
-      puts 'Missing Twitter Credentials, ignoring twitter'
+    unless File.file?("/run/secrets/TWITTER_#{c.upcase}")
+      puts "Missing TWITTER_#{c.upcase}, ignoring twitter"
       return
     end
-    config.send( "#{c}=", ENV["TWITTER_#{c.upcase}"] )
+    config.send( "#{c}=", File.read("/run/secrets/TWITTER_#{c.upcase}").strip )
   end
 end
 

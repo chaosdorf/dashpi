@@ -6,7 +6,7 @@ last_music_update = Time.now
 last_door_state = "unknown"
 
 SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
-  MQTT::Client.connect('mqttserver') do |client|
+  MQTT::Client.connect(ENV['MOSQUITTO_HOST']) do |client|
     client.subscribe('sensors/flukso/power/sum/30s_average') # power
     client.subscribe('door/status') # door
     client.subscribe('space/bell') # door bell

@@ -1,12 +1,18 @@
+require 'dotenv/load'
 require 'dashing'
+require 'raven'
 
 Dotenv.load
 
-configure do
-  set :auth_token, ENV['DASHING_AUTH_TOKEN']
+if File.file?("/run/secrets/SENTRY_DSN")
+    Raven.configure do |config|
+        config.server = File.read("/run/secrets/SENTRY_DSN").strip
+    end
 end
 
-require 'raven'
+configure do
+  set :auth_token, File.read("/run/secrets/DASHING_AUTH_TOKEN").strip
+end
 
 use Raven::Rack
 

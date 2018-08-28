@@ -1,11 +1,10 @@
 # :first_in sets how long it takes before the job is first run. In this case, it is run immediately
 require 'net/ping/tcp'
 
-host = "speedtest-2.unitymedia.de"
 series = Array.new(20).fill(0)
 
 SCHEDULER.every '5s', :first_in => 0 do |job|
-  probe = Net::Ping::TCP.new(host)
+  probe = Net::Ping::TCP.new(ENV['PING_HOST'])
   probe.port = 80
   probe.ping
   begin
@@ -28,6 +27,6 @@ SCHEDULER.every '5s', :first_in => 0 do |job|
   end
   series.rotate!
   data = series.map.with_index{ |n,i| {"x" => -i, "y" => n} }
-  send_event('ping', { points: data, status: status, moreinfo: "$ ping speedtest.unitymedia.de #{down ? "is down" : ""}" })
+  send_event('ping', { points: data, status: status, moreinfo: "$ ping #{ENV['PING_HOST']} #{down ? "is down" : ""}" })
 
 end
