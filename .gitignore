@@ -2,5 +2,6 @@
 .bundle
 .env
 vendor/bundle
+vendor/ruby
 bin
 history.yml
