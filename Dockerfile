@@ -12,13 +12,18 @@ WORKDIR /app
 # Make port 3030 available to the world outside this container
 EXPOSE 3030
 
-# Copy the current directory contents into the container at /app
-COPY . /app
-RUN chown -R app:app /app
 USER app
+
+
+# Copy bundle relevant stuff first
+COPY Gemfile /app
+COPY Gemfile.lock /app
 
 # Install dependencies
 RUN bundle install --path vendor/bundle
+
+# Copy the current directory contents into the container at /app
+COPY . /app
 
 # Define environment variable
 ENV RAILS_ENV production
