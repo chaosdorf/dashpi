@@ -8,7 +8,11 @@ SCHEDULER.every '1m', :first_in => 0 do |job|
   res = http.request(request).response
   case res
   when Net::HTTPSuccess then
-    send_event('cat', { image: 'data:image/jpeg;base64,' + Base64.strict_encode64(res.body) })
+    if res.content_length > 20000000 then
+      send_event('cat', { image: url })
+    else
+      send_event('cat', { image: 'data:image/jpeg;base64,' + Base64.strict_encode64(res.body) })
+    end
   else
     send_event('cat', {})
   end
