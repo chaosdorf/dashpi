@@ -1,5 +1,5 @@
 require "raven"
 
-def SCHEDULER.on_exception(exception)
+def SCHEDULER.on_error(job, exception)
   Raven.capture_exception(exception)
 end
