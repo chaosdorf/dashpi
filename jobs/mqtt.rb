@@ -6,7 +6,16 @@ last_music_update = Time.now
 last_door_state = "unknown"
 
 SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
-  MQTT::Client.connect('mqttserver') do |client|
+    client = MQTT::Client.new
+    client.host = 'mqttserver'
+    client.ack_timeout = 15 # default is 5
+    client.keep_alive = 90 # default is 15
+    client.client_id = 'dashboard-' + (settings.environment == :development ? 'dev' : 'prod')
+    client.clean_session = false
+    puts "mqtt: connecting to #{client.host} as #{client.client_id}..."
+    client.connect()
+    puts "mqtt: connected to #{client.host} as #{client.client_id}."
+    
     client.subscribe('sensors/flukso/power/sum/30s_average') # power
     client.subscribe('door/status') # door
     client.subscribe('space/bell') # door bell
@@ -58,5 +67,5 @@ SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
         end
       end
     end
-  end
+    client.disconnect() # TODO: does this make sense?
 end
