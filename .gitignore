@@ -5,3 +5,4 @@ vendor/bundle
 vendor/ruby
 bin
 history.yml
+secrets/

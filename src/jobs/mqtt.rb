@@ -7,7 +7,7 @@ last_door_state = "unknown"
 
 SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
     client = MQTT::Client.new
-    client.host = 'mqttserver'
+    client.host = ENV['MOSQUITTO_HOST']
     client.ack_timeout = 15 # default is 5
     client.keep_alive = 90 # default is 15
     client.client_id = 'dashboard-' + (settings.environment == :development ? 'dev' : 'prod')

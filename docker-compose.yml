@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  app:
+    build: .
+    volumes:
+      - ./src:/app
+    environment:
+      - TRAFFIC_HOST=feedback.chaosdorf.space
+      - MOSQUITTO_HOST=mqttserver.chaosdorf.space
+      - PING_HOST=speedtest-2.unitymedia.de
+    secrets:
+      - DASHING_AUTH_TOKEN
+      - TWITTER_ACCESS_TOKEN
+      - TWITTER_ACCESS_TOKEN_SECRET
+      - TWITTER_CONSUMER_KEY
+      - TWITTER_CONSUMER_SECRET
+    ports:
+      - 3030:3030
+
+secrets:
+  DASHING_AUTH_TOKEN:
+    file: ./secrets/DASHING_AUTH_TOKEN
+  TWITTER_ACCESS_TOKEN:
+    file: ./secrets/TWITTER_ACCESS_TOKEN
+  TWITTER_ACCESS_TOKEN_SECRET:
+    file: ./secrets/TWITTER_ACCESS_TOKEN_SECRET
+  TWITTER_CONSUMER_KEY:
+    file: ./secrets/TWITTER_CONSUMER_KEY
+  TWITTER_CONSUMER_SECRET:
+    file: ./secrets/TWITTER_CONSUMER_SECRET
