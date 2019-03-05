@@ -11,7 +11,7 @@ RUN bundle config --global frozen 1 \
  && find /usr/local/bundle/gems/ -name "*.c" -delete \
  && find /usr/local/bundle/gems/ -name "*.o" -delete
 
-COPY ./src/* ./
+COPY ./src .
 
 
 FROM ruby:2.4-alpine
