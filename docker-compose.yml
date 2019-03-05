@@ -3,6 +3,7 @@ version: '3.7'
 services:
   app:
     build: .
+    image: chaosdorf/dashpi
     volumes:
       - ./src:/app
     environment:
