@@ -27,7 +27,7 @@ ENV PING_HOST speedtest-2.unitymedia.de
 WORKDIR /app
 
 # Define environment variable
-ENV RAILS_ENV production
+ENV RACK_ENV production
 
 ENTRYPOINT ["bundle", "exec", "smashing", "start"]
 
