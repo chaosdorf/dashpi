@@ -12,7 +12,8 @@ RUN bundle config --global frozen 1 \
  && find /usr/local/bundle/gems/ -name "*.o" -delete
 
 COPY ./src .
-
+COPY Smashing_smashing_137.diff .
+RUN patch /usr/local/bundle/gems/smashing-1.1.0/lib/dashing/app.rb Smashing_smashing_137.diff
 
 FROM ruby:2.4-alpine
 RUN apk --update add nodejs tzdata
