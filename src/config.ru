@@ -10,8 +10,10 @@ if File.file?("/run/secrets/SENTRY_DSN")
     end
 end
 
-configure do
-  set :auth_token, File.read("/run/secrets/DASHING_AUTH_TOKEN").strip
+if File.file?("/run/secrets/DASHING_AUTH_TOKEN")
+  configure do
+    set :auth_token, File.read("/run/secrets/DASHING_AUTH_TOKEN").strip
+  end
 end
 
 use Raven::Rack
