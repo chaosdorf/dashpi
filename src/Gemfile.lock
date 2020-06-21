@@ -127,7 +127,6 @@ DEPENDENCIES
   json
   mqtt
   net-ping
-  rake
   sentry-raven
   smashing
   twitter
