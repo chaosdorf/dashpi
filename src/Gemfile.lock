@@ -68,6 +68,7 @@ GEM
     rack-protection (2.1.0)
       rack
     rake (13.0.3)
+    rexml (3.2.5)
     ruby2_keywords (0.0.4)
     rufus-scheduler (3.7.0)
       fugit (~> 1.1, >= 1.1.6)
@@ -136,6 +137,7 @@ DEPENDENCIES
   json
   mqtt
   net-ping
+  rexml
   sentry-raven
   smashing
   twitter

@@ -1,4 +1,4 @@
-FROM ruby:2.7-alpine as Builder
+FROM ruby:3.0-alpine as Builder
 RUN apk --update add g++ make musl-dev
 
 WORKDIR /app
@@ -13,7 +13,7 @@ RUN bundle config --global frozen 1 \
 
 COPY ./src .
 
-FROM ruby:2.7-alpine
+FROM ruby:3.0-alpine
 RUN apk --update add nodejs tzdata
 
 COPY --from=Builder /usr/local/bundle /usr/local/bundle

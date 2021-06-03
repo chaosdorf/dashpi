@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'smashing'
+gem 'rexml'
 gem 'xml-simple'
 gem 'twitter'
 gem 'dotenv'
