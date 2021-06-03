@@ -1,6 +1,5 @@
-FROM ruby:2.6-alpine as Builder
+FROM ruby:2.7-alpine as Builder
 RUN apk --update add g++ make musl-dev
-RUN gem install bundler:2.1.4
 
 WORKDIR /app
 
@@ -14,9 +13,8 @@ RUN bundle config --global frozen 1 \
 
 COPY ./src .
 
-FROM ruby:2.6-alpine
+FROM ruby:2.7-alpine
 RUN apk --update add nodejs tzdata
-RUN gem install bundler:2.1.4
 
 COPY --from=Builder /usr/local/bundle /usr/local/bundle
 COPY --from=Builder /app /app
