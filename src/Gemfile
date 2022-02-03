@@ -8,7 +8,4 @@ gem 'haml'
 gem 'net-ping'
 gem 'mqtt'
 gem 'json'
-
-group :production do
-  gem 'sentry-raven'
-end
+gem 'sentry-ruby'

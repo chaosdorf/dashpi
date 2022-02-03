@@ -1,12 +1,13 @@
 require 'dotenv/load'
 require 'dashing'
-require 'raven'
+require 'sentry-ruby'
 
 Dotenv.load
 
 if File.file?("/run/secrets/SENTRY_DSN")
-    Raven.configure do |config|
-        config.server = File.read("/run/secrets/SENTRY_DSN").strip
+    Sentry.init do |config|
+        config.dsn = File.read("/run/secrets/SENTRY_DSN").strip
+        config.breadcrumbs_logger = [:sentry_logger, :http_logger]
     end
 end
 
@@ -16,7 +17,7 @@ if File.file?("/run/secrets/DASHING_AUTH_TOKEN")
   end
 end
 
-use Raven::Rack
+use Sentry::Rack::CaptureExceptions
 
 map Sinatra::Application.assets_prefix do
   run Sinatra::Application.sprockets
