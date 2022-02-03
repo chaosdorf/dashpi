@@ -1,44 +1,35 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.7.0)
+    addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     buftok (0.2.0)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.1.8)
-    daemons (1.4.0)
+    concurrent-ruby (1.1.9)
+    daemons (1.4.1)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.7.6)
     equalizer (0.0.11)
-    et-orbi (1.2.4)
+    et-orbi (1.2.6)
       tzinfo
     eventmachine (1.2.7)
     execjs (2.8.1)
-    faraday (1.4.2)
-      faraday-em_http (~> 1.0)
-      faraday-em_synchrony (~> 1.0)
-      faraday-excon (~> 1.1)
-      faraday-net_http (~> 1.0)
-      faraday-net_http_persistent (~> 1.1)
-      multipart-post (>= 1.2, < 3)
+    faraday (2.2.0)
+      faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
-    faraday-em_http (1.0.0)
-    faraday-em_synchrony (1.0.0)
-    faraday-excon (1.1.0)
-    faraday-net_http (1.0.1)
-    faraday-net_http_persistent (1.1.0)
-    ffi (1.15.1)
+    faraday-net_http (2.0.1)
+    ffi (1.15.5)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
-    fugit (1.4.5)
+    fugit (1.5.2)
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.4)
-    haml (5.2.1)
+    haml (5.2.2)
       temple (>= 0.8.0)
       tilt
     http (4.4.1)
@@ -46,13 +37,13 @@ GEM
       http-cookie (~> 1.0)
       http-form_data (~> 2.2)
       http-parser (~> 1.2.0)
-    http-cookie (1.0.3)
+    http-cookie (1.0.4)
       domain_name (~> 0.5)
     http-form_data (2.3.0)
     http-parser (1.2.3)
       ffi-compiler (>= 1.0, < 2.0)
     http_parser.rb (0.6.0)
-    json (2.5.1)
+    json (2.6.1)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
     mqtt (0.5.0)
@@ -67,10 +58,10 @@ GEM
     rack (2.2.3)
     rack-protection (2.1.0)
       rack
-    rake (13.0.3)
+    rake (13.0.6)
     rexml (3.2.5)
-    ruby2_keywords (0.0.4)
-    rufus-scheduler (3.7.0)
+    ruby2_keywords (0.0.5)
+    rufus-scheduler (3.8.1)
       fugit (~> 1.1, >= 1.1.6)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -88,7 +79,7 @@ GEM
       rack-protection (= 2.1.0)
       sinatra (= 2.1.0)
       tilt (~> 2.0)
-    smashing (1.3.4)
+    smashing (1.3.5)
       coffee-script (~> 2.4)
       execjs (~> 2.7)
       rack (~> 2.2)
@@ -107,7 +98,7 @@ GEM
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
       rack (>= 1, < 3)
-    thor (1.1.0)
+    thor (1.2.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
     twitter (7.0.0)
@@ -125,8 +116,9 @@ GEM
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.7.7)
-    xml-simple (1.1.8)
+    unf_ext (0.0.8)
+    xml-simple (1.1.9)
+      rexml
 
 PLATFORMS
   ruby
@@ -137,7 +129,6 @@ DEPENDENCIES
   json
   mqtt
   net-ping
-  rexml
   sentry-raven
   smashing
   twitter
