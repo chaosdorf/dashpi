@@ -1,5 +1,6 @@
 # :first_in sets how long it takes before the job is first run. In this case, it is run immediately
 SCHEDULER.every '5s', :first_in => 0 do |job|
+  return  # TODO: get information from new source
   rx = Hash.new
   tx = Hash.new
   rx['value'] = Net::HTTP.get(ENV['TRAFFIC_HOST'], '/snmp/ops_in').to_i * 8
