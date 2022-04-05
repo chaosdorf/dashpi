@@ -23,14 +23,11 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);;
   }
 
   .condition {
-    font-weight: 500;
-    font-size: 25px;
     color: $value-color;
   }
 
   .forecast {
     color: $title-color;
-		font-size: 25px;
   }
 
   .updated-at {

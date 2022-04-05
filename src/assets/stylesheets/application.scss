@@ -50,7 +50,7 @@ html {
 body {
   margin: 0;
   background-color: $background-color;
-  font-size: 20px;
+  font-size: 35px;
   color: $text-color;
   font-family: 'Roboto', sans-serif;
   width: 100%;
@@ -97,22 +97,18 @@ h1, h2, h3, h4, h5, p {
 h1 {
   margin-bottom: 12px;
   text-align: center;
-  font-size: 30px;
+  font-size: 40px;
   font-weight: 400;
 }
 h2 {
-  font-size: 60px;
+  font-size: 65px;
   font-weight: 700;
   color: $text-color;
 }
 h3 {
-  font-size: 32px;
+  font-size: 35px;
   font-weight: 600;
   color: $text-color;
-}
-
-div[data-id=chaosdoor-mode] h3 {
-  font-size: 50px;
 }
 
 // ----------------------------------------------------------------------------
@@ -201,14 +197,14 @@ div[data-id=chaosdoor-mode] h3 {
 }
 
 .more-info {
-  font-size: 15px;
+  font-size: 25px;
   bottom: 32px;
   left: 0;
   right: 0;
 }
 
 .updated-at {
-  font-size: 15px;
+  font-size: 25px;
   bottom: 12px;
   left: 0;
   right: 0;

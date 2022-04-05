@@ -1,14 +1,17 @@
 <h1 class="title" data-bind="title"></h1>
 <div class="weather-container">
-  <h2 id="climacon-main" class="climacon"> <span class="temp" data-bind="now.temp"></span></h2>
-  <p class="condition" data-bind="now.condition"></p>
-	<p class="forecast">
+    <h2 id="climacon-main" class="climacon"></h2>
+    <h3>
+	    <span class="temp" data-bind="now.temp"></span>
+	    <span class="condition" data-bind="now.condition"></span>
+	</h3>
+	<p class="forecast more-info">
 		+1h:&nbsp;
 		<span data-bind="onehour.temp"></span>&nbsp;
 		<span data-bind="onehour.condition"></span>&nbsp;
 		<i id="climacon-onehour" class="climacon"></i>
 	</p>
-	<p class="forecast">
+	<p class="forecast more-info">
 		+2h:&nbsp;
 		<span data-bind="twohour.temp"></span>&nbsp;
 		<span data-bind="twohour.condition"></span>&nbsp;
