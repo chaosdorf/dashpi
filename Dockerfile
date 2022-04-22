@@ -22,6 +22,7 @@ COPY --from=Builder /app /app
 ENV TRAFFIC_HOST feedback.chaosdorf.space
 ENV MOSQUITTO_HOST mqttserver.chaosdorf.space
 ENV PING_HOST speedtest-2.unitymedia.de
+ENV PROMETHEUS_URL http://prometheus:9090
 
 WORKDIR /app
 
