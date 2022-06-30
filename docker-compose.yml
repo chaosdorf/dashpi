@@ -7,7 +7,6 @@ services:
     volumes:
       - ./src:/app
     environment:
-      - TRAFFIC_HOST=feedback.chaosdorf.space
       - MOSQUITTO_HOST=mqttserver.chaosdorf.space
       - PING_HOST=speedtest-2.unitymedia.de
       - PROMETHEUS_URL=http://prometheus:9090
