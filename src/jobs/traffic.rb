@@ -4,7 +4,7 @@ prometheus = Prometheus::ApiClient.client(url: ENV['PROMETHEUS_URL'])
 
 def query(prometheus, q)
   res = prometheus.query(query: "rate(if#{q}Octets{ifDescr=\"eth1\"}[2m])")
-  res['result'][0]['value'][1].to_f
+  res['result'][0]['value'][1].to_f * 8
 end
 
 # :first_in sets how long it takes before the job is first run. In this case, it is run immediately
