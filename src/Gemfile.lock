@@ -48,9 +48,8 @@ GEM
     fugit (1.7.1)
       et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
-    haml (6.0.1)
-      temple (>= 0.8.2)
-      thor
+    haml (5.2.2)
+      temple (>= 0.8.0)
       tilt
     http (4.4.1)
       addressable (~> 2.3)
@@ -147,7 +146,7 @@ PLATFORMS
 
 DEPENDENCIES
   dotenv
-  haml
+  haml (~> 5)
   json
   mqtt
   net-ping
