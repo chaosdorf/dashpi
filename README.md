@@ -5,14 +5,14 @@
 ```
 sudo apt install ruby ruby-dev build-essential git bundler
 git clone https://github.com/chaosdorf/dashpi.git
-cd dashpi
-bundle install --path vendor/bundle
+cd dashpi/src
+bundle install --path ../vendor/bundle
 ```
 
 ## Run ##
 
 ```
-cd dashpi
+cd dashpi/src
 bundle exec smashing start
 ```
 
