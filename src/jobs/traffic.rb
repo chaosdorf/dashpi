@@ -1,5 +1,10 @@
 require 'prometheus/api_client'
 
+unless ENV.has_key?('PROMETHEUS_URL')
+  puts 'Missing PROMETHEUS_URL, disabling traffic.'
+  return
+end
+
 prometheus = Prometheus::ApiClient.client(url: ENV['PROMETHEUS_URL'])
 
 def query(prometheus, q)
