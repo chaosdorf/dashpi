@@ -1,9 +1,6 @@
 require 'twitter'
-require 'dotenv'
 require 'cgi'
 require 'time'
-
-Dotenv.load
 
 count_tweets = 10
 things_to_search_for = 'chaosdorf OR #dorfleaks OR Dorfkueche -rt' # -rt excludes retweets
@@ -17,11 +14,12 @@ end
 
 rest_client = Twitter::REST::Client.new do |config|
   ['consumer_key', 'consumer_secret', 'access_token', 'access_token_secret'].each do |c|
-    unless File.file?("/run/secrets/TWITTER_#{c.upcase}")
+    value = get_secret("TWITTER_#{c.upcase}")
+    unless value
       puts "Missing TWITTER_#{c.upcase}, ignoring twitter"
       return
     end
-    config.send( "#{c}=", File.read("/run/secrets/TWITTER_#{c.upcase}").strip )
+    config.send( "#{c}=", value )
   end
 end
 

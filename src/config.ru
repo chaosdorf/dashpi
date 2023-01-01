@@ -4,16 +4,16 @@ require 'sentry-ruby'
 
 Dotenv.load
 
-if File.file?("/run/secrets/SENTRY_DSN")
+get_secret('SENTRY_DSN') do |dsn|
     Sentry.init do |config|
-        config.dsn = File.read("/run/secrets/SENTRY_DSN").strip
+        config.dsn = dsn
         config.breadcrumbs_logger = [:sentry_logger, :http_logger]
     end
 end
 
-if File.file?("/run/secrets/DASHING_AUTH_TOKEN")
+get_secret('DASHING_AUTH_TOKEN') do |auth_token|
   configure do
-    set :auth_token, File.read("/run/secrets/DASHING_AUTH_TOKEN").strip
+    set :auth_token, auth_token
   end
 end
 
