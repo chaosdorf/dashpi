@@ -1,35 +1,43 @@
-# [Chaosdorf Dashboard](https://wiki.chaosdorf.de/Dashboard) #
+# [Chaosdorf Dashboard](https://wiki.chaosdorf.de/Dashboard)
 
 ## Setup ##
 
+For running this in production, we recommend [our docker image](https://hub.docker.com/r/chaosdorf/dashpi), see [our compose file](https://github.com/chaosdorf/docker-stacks/blob/main/enabled/dashpi.yml).
+
+For development, we have included a sample compose file that builds the image locally
+and loads the secrets from the `secrets` folder.
+
+```shell
+docker-compose up --build
 ```
+
+If you don't want to use Docker for whatever reason, you're able to run it from source in both cases:
+
+```shell
 sudo apt install ruby ruby-dev build-essential git bundler
-git clone https://github.com/chaosdorf/dashpi.git
-cd dashpi/src
-bundle install --path ../vendor/bundle
+cd src
+bundle install --path ../vendor/bundle  # this installs the dependencies
+bundle exec smashing start  # this starts the application
 ```
 
-## Run ##
+This manual method also expects the secrets to be located in the `secrets` folder.
 
-```
-cd dashpi/src
-bundle exec smashing start
-```
+You might want to set `RACK_ENV` to `production`.
 
-**TODO**: *Set environment variables for Twitter auth.*
+## secrets
 
-## Update configuration ##
+For all widgets to work, you'll need to acquire a few secrets:
 
-```
-cd dashpi
-git pull
-```
+ * `TWITTER_CONSUMER_KEY`
+ * `TWITTER_CONSUMER_SECRET`
+ * `TWITTER_ACCESS_TOKEN`
+ * `TWITTER_ACCESS_TOKEN_SECRET`
 
-## Update dependencies ##
+For a production environment you should also add:
 
-```
-cd dashpi
-bundle install --path vendor/bundle
-```
+ * `SENTRY_DSN`
+ * `DASHING_AUTH_TOKEN`
+
+## more details
 
 Check out https://smashing.github.io/ for more information.
