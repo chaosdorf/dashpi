@@ -76,7 +76,7 @@ GEM
       faraday (>= 0.9, < 2.0.0)
     public_suffix (5.0.0)
     raabro (1.4.0)
-    rack (2.2.4)
+    rack (2.2.6.4)
     rack-protection (2.2.2)
       rack
     rake (13.0.6)
