@@ -3,7 +3,7 @@ require 'mqtt'
 power_series = Array.new(20).fill(0)
 music_status = {}
 last_music_update = Time.now
-last_door_state = "unknown"
+last_dorfstatus = "unknown"
 
 SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
     client = MQTT::Client.new
@@ -17,7 +17,7 @@ SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
     puts "mqtt: connected to #{client.host} as #{client.client_id}."
     
     client.subscribe('sensors/flukso/power/sum/30s_average') # power
-    client.subscribe('door/status') # door
+    client.subscribe('space/dorfstatus')
     client.subscribe('space/bell') # door bell
     client.subscribe('music/#') # music
 
@@ -40,19 +40,19 @@ SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
         end
         data = power_series.map.with_index{ |n,i| {"x" => -i, "y" => n} }
         send_event('power-total', { points: data, status: status, moreinfo: "total power consumption" })
-      elsif topic == 'door/status'
+      elsif topic == 'space/dorfstatus'
         ##################################
-        # D O O R                        #
+        # D O R F                        #
         ##################################
-        last_door_state = message
-        send_event('chaosdoor-mode', { text: message, status: "normal" } )
+        last_dorfstatus = message
+        send_event('dorfstatus', { text: message, status: "normal" } )
       elsif topic == 'space/bell' # message is 'ringdingding'
         ##################################
         # R I N G                        #
         ##################################
-        send_event('chaosdoor-mode', { text: message, status: "danger" } )
+        send_event('dorfstatus', { text: message, status: "danger" } )
         SCHEDULER.in '10s' do
-          send_event('chaosdoor-mode', { text: last_door_state, status: "normal" } )
+          send_event('dorfstatus', { text: last_dorfstatus, status: "normal" } )
         end
       elsif topic.start_with?('music/')
         ##################################
