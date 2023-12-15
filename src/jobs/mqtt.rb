@@ -26,23 +26,25 @@ SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
 
     client.get do |topic,message|
       message = message.force_encoding('utf-8')
-      if topic == 'sensors/flukso/power/sum/30s_average'
+      if topic == 'sensor/esp8266_64760E/data'
         ##################################
-        # P O W E R                      #
+        # C O 2                          #
         ##################################
-        value = Float(message).round
-        power_series[0] = value
-        power_series.rotate!
+        # Hackcenter CO2
+        data = JSON.parse(message)
+        value = Float(data["co2_ppm"])
+        co2_series[0] = value
+        co2_series.rotate!
         case value
-        when 0..1500
+        when 0...1000
           status = "normal"
-        when 1500..3000
+        when 1000...2000
           status = "danger"
         else
           status = "warning"
         end
-        data = power_series.map.with_index{ |n,i| {"x" => -i, "y" => n} }
-        send_event('power-total', { points: data, status: status, moreinfo: "total power consumption" })
+        data = co2_series.map.with_index { |n,i| {"x" => -i, "y" => n} }
+        send_event('lounge-co2', {points: data, status: status})
       elsif topic == 'space/dorfstatus'
         ##################################
         # D O R F                        #
@@ -67,23 +69,7 @@ SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
           SCHEDULER.in '1s' do
             send_event('music', music_status.clone)
           end
-        end
-      elsif topic == 'sensor/esp8266_64760E/data'
-        # Hackcenter CO2
-        data = JSON.parse(message)
-        value = Float(data["co2_ppm"])
-        co2_series[0] = value
-        co2_series.rotate!
-        case value
-        when 0...1000
-          status = "normal"
-        when 1000...2000
-          status = "danger"
-        else
-          status = "warning"
-        end
-        data = co2_series.map.with_index { |n,i| {"x" => -i, "y" => n} }
-        send_event('lounge-co2', {points: data, status: status})
+        end     
       end
     end
     client.disconnect() # TODO: does this make sense?
