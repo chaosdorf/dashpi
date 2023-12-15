@@ -1,6 +1,8 @@
 require 'mqtt'
+require 'json'
 
 power_series = Array.new(20).fill(0)
+co2_series = Array.new(180).fill(0)
 music_status = {}
 last_music_update = Time.now
 last_dorfstatus = "unknown"
@@ -69,7 +71,10 @@ SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
       end
       elsif topic == 'sensor/esp8266_64760E/data'
         # Hackcenter CO2
-        value = Float(topic.co2_ppm)
+        data = JSON.parse(message)
+        value = Float(data["co2_ppm"])
+        co2_series[0] = value
+        co2_series.rotate!
         case value
         when 0...1000
           status = "normal"
@@ -78,7 +83,8 @@ SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
         else
           status = "warning"
         end
-        send_event('lounge-co2', {text: value, status: status})
+        data = co2_series.map.with_index { |n,i| {"x" => -i, "y" => n} }
+        send_event('lounge-co2', {points: data, status: status})
       end
     end
     client.disconnect() # TODO: does this make sense?
