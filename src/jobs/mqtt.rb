@@ -68,7 +68,6 @@ SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
             send_event('music', music_status.clone)
           end
         end
-      end
       elsif topic == 'sensor/esp8266_64760E/data'
         # Hackcenter CO2
         data = JSON.parse(message)
