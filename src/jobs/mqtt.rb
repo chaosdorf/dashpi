@@ -18,11 +18,10 @@ SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
     client.connect()
     puts "mqtt: connected to #{client.host} as #{client.client_id}."
     
-    client.subscribe('sensors/flukso/power/sum/30s_average') # power
+    client.subscribe('sensor/esp8266_64760E/data') # hackcenter co2 sensor
     client.subscribe('space/dorfstatus')
     client.subscribe('space/bell') # door bell
     client.subscribe('music/#') # music
-    client.subscribe('sensor/#') # sensorium
 
     client.get do |topic,message|
       message = message.force_encoding('utf-8')
