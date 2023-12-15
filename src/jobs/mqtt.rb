@@ -20,6 +20,7 @@ SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
     client.subscribe('space/dorfstatus')
     client.subscribe('space/bell') # door bell
     client.subscribe('music/#') # music
+    client.subscribe('sensor/#') # sensorium
 
     client.get do |topic,message|
       message = message.force_encoding('utf-8')
@@ -65,6 +66,19 @@ SCHEDULER.every '5m', :allow_overlapping => false, :first_in => 0 do |job|
             send_event('music', music_status.clone)
           end
         end
+      end
+      elsif topic == 'sensor/esp8266_64760E/data'
+        # Hackcenter CO2
+        value = Float(topic.co2_ppm)
+        case value
+        when 0...1000
+          status = "normal"
+        when 1000...2000
+          status = "danger"
+        else
+          status = "warning"
+        end
+        send_event('lounge-co2', {text: value, status: status})
       end
     end
     client.disconnect() # TODO: does this make sense?
