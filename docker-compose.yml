@@ -9,7 +9,7 @@ services:
     environment:
       - MOSQUITTO_HOST=mqttserver.chaosdorf.space
       - PING_HOST=speedtest-2.unitymedia.de
-      - PROMETHEUS_URL=http://prometheus:9090
+      - PROMETHEUS_URL=https://prometheus.chaosdorf.space/
       - RACK_ENV=development
     secrets:
       - DASHING_AUTH_TOKEN
