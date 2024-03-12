@@ -2,14 +2,14 @@ require("uri")
 require("net/http")
 require("json")
 
-uri = URI('https://vrrf.finalrewind.org/D%C3%BCsseldorf/Kruppstr.json?no_lines=4')
+uri = URI('https://vrrf.finalrewind.org/D%C3%BCsseldorf/Kruppstr.json?no_lines=6')
 http = Net::HTTP.new(uri.host, uri.port)
 http.use_ssl = true
 request = Net::HTTP::Get.new(uri.request_uri)
 
 def json_to_data(data)
   return {
-    :time => data[2],
+    :time => data[2].gsub("sofort", "0 min").gsub("min", ""),
     :line => data[0],
     :dest => data[1].gsub("D-", "") # remove "D-"
   }
@@ -33,9 +33,11 @@ SCHEDULER.every '1m', :first_in => 0 do |job|
       :t2 => json_to_data(pre[1]),
       :t3 => json_to_data(pre[2]),
       :t4 => json_to_data(pre[3]),
+      :t5 => json_to_data(pre[4]),
+      :t6 => json_to_data(pre[5]),
       :status => "normal"
     }
-    if data[:t4][:time] == ""
+    if data[:t6][:time] == ""
       data[:status] = "warning"
     end
     send_event('efa', data)
