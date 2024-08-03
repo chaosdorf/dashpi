@@ -1,4 +1,4 @@
-FROM ruby:3.2-alpine as Builder
+FROM ruby:3.2-alpine AS builder
 RUN apk --update add g++ make musl-dev
 
 WORKDIR /app
@@ -16,17 +16,16 @@ COPY ./src .
 FROM ruby:3.2-alpine
 RUN apk --update add nodejs tzdata
 
-COPY --from=Builder /usr/local/bundle /usr/local/bundle
-COPY --from=Builder /app /app
+COPY --from=builder /usr/local/bundle /usr/local/bundle
+COPY --from=builder /app /app
 
-ENV MOSQUITTO_HOST mqttserver.chaosdorf.space
-ENV PING_HOST speedtest-2.unitymedia.de
-ENV PROMETHEUS_URL https://prometheus.chaosdorf.space
+# Define environment variables
+ENV RACK_ENV=production
+ENV MOSQUITTO_HOST=mqttserver.chaosdorf.space
+ENV PING_HOST=speedtest-2.unitymedia.de
+ENV PROMETHEUS_URL=https://prometheus.chaosdorf.space
 
 WORKDIR /app
-
-# Define environment variable
-ENV RACK_ENV production
 
 ENTRYPOINT ["bundle", "exec", "smashing", "start"]
 
