@@ -8,7 +8,7 @@ end
 prometheus = Prometheus::ApiClient.client(url: ENV['PROMETHEUS_URL'])
 
 def query(prometheus, q)
-  res = prometheus.query(query: "rate(if#{q}Octets{ifDescr=\"eth1\"}[2m])")
+  res = prometheus.query(query: "rate(if#{q}Octets{instance=\"10.1.0.1\", ifName=\"eth4\"}[2m])")
   res['result'][0]['value'][1].to_f * 8
 end
 
