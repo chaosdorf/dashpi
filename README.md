@@ -16,7 +16,8 @@ If you don't want to use Docker for whatever reason, you're able to run it from 
 ```shell
 sudo apt install ruby ruby-dev build-essential git bundler
 cd src
-bundle install --path ../vendor/bundle  # this installs the dependencies
+bundle config set --local path '../vendor/bundle'
+bundle install # this installs the dependencies
 bundle exec smashing start  # this starts the application
 ```
 
