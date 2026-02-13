@@ -27,13 +27,6 @@ You might want to set `RACK_ENV` to `production`.
 
 ## secrets
 
-For all widgets to work, you'll need to acquire a few secrets:
-
- * `TWITTER_CONSUMER_KEY`
- * `TWITTER_CONSUMER_SECRET`
- * `TWITTER_ACCESS_TOKEN`
- * `TWITTER_ACCESS_TOKEN_SECRET`
-
 For a production environment you should also add:
 
  * `SENTRY_DSN`
